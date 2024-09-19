@@ -1,0 +1,16 @@
+services:
+  server:
+    container_name: backend
+    build:
+      context: ..
+    command: uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    ports:
+      - 8000:8000
+    volumes:
+      - ..:/app
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
