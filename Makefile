@@ -14,7 +14,7 @@ drop-app:
 .PHONY: all
 all:
 	${DC} -f ${API_FILE} -f ${STORAGE_FILE} up --build -d
-	${DC} -f ${STORAGE_FILE} exec  server alembic upgrade head
+	${DC} -f ${API_FILE} exec backend alembic upgrade head
 
 
 .PHONY: drop-all
@@ -32,9 +32,14 @@ drop-storage:
 
 .PHONY: storage-init
 storage-init:
-	${DC} -f ${STORAGE_FILE} exec server alembic revision --autogenerate -m "Init"
+	${DC} -f ${API_FILE} exec backend alembic revision --autogenerate -m "Init"
 
 
 .PHONY: storage-upgrade-head
 storage-upgrade-head:
-	${DC} -f ${STORAGE_FILE} exec  server alembic upgrade head
+	${DC} -f ${API_FILE} exec  backend alembic upgrade head
+
+.PHONY: run-tests
+run-tests:
+	${DC} -f ${API_FILE} exec backend pytest tests.py -W ignore::DeprecationWarning;
+	

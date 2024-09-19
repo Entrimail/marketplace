@@ -15,3 +15,9 @@ make all
 ```bash
 make drop-all
 ```
+
+## test
+
+```bash
+make run-tests
+```

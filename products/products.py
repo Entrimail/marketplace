@@ -48,7 +48,7 @@ async def update_product(
     )
 
 
-@router.delete("/{product_id}/", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{product_id}/", status_code=status.HTTP_200_OK)
 async def delete_product(
     product: ProductBaseSchema = Depends(product_by_id),
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
